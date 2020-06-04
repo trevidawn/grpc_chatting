@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package cpp_chat;
+
+message Empty {}
+
+message Message {
+  string user_id = 1;
+  string text = 2;
+}
+
+message User {
+  string user_id = 1;
+}
+
+message SimpleResponse {
+  bool responseFlag = 1;
+}
+
+service chat {
+  rpc login(User) returns (SimpleResponse) {};
+  rpc userList(Empty) returns (stream User) {};
+  rpc reLogin(stream User) returns (SimpleResponse) {};
+  rpc enterChatRoom(stream Message) returns (stream Message) {};
+}
