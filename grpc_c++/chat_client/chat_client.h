@@ -14,8 +14,10 @@ public:
     //grpc
     void login(const std::string input_user_id);
     void reLogin(const std::string input_user_id);
-    void userList();
-    void enterChatRoom();
+    void chatRoomList();
+    void createChatRoom(std::string chatRoomName);
+    void enterChatRoom(std::string chatRoomName);
+    void chatting();
 
     //getter
     bool getLoginSession();
@@ -23,9 +25,8 @@ public:
 
 private:
     std::unique_ptr<cpp_chat::chat::Stub> stub_;
-    bool loginSession;
     std::string user_id;
-    //string input;
+    bool loginSession;
 };
 
 #endif //CHAT_CHAT_CLIENT_H

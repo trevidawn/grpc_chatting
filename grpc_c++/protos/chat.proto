@@ -9,6 +9,11 @@ message Message {
   string text = 2;
 }
 
+message ChatRoom {
+  string room_name = 1;
+  User user = 2;
+}
+
 message User {
   string user_id = 1;
 }
@@ -19,7 +24,14 @@ message SimpleResponse {
 
 service chat {
   rpc login(User) returns (SimpleResponse) {};
-  rpc userList(Empty) returns (stream User) {};
+
   rpc reLogin(stream User) returns (SimpleResponse) {};
-  rpc enterChatRoom(stream Message) returns (stream Message) {};
+
+  rpc createChatRoom(ChatRoom) returns (SimpleResponse) {};
+
+  rpc chatRoomList(Empty) returns (stream ChatRoom) {};
+
+  rpc enterChatRoom(ChatRoom) returns (SimpleResponse) {};
+
+  rpc chatting(stream Message) returns (stream Message) {};
 }

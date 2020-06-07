@@ -13,7 +13,8 @@ public:
 
     void loginCheck();
     void loginView();
-    void userListView();
+    void chatRoomListView();
+    void createChatRoomView();
     void mainView();
     void chatRoomView();
 

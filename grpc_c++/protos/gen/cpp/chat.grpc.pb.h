@@ -43,15 +43,6 @@ class chat final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>> PrepareAsynclogin(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>>(PrepareAsyncloginRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderInterface< ::cpp_chat::User>> userList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) {
-      return std::unique_ptr< ::grpc::ClientReaderInterface< ::cpp_chat::User>>(userListRaw(context, request));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>> AsyncuserList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>>(AsyncuserListRaw(context, request, cq, tag));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>> PrepareAsyncuserList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>>(PrepareAsyncuserListRaw(context, request, cq));
-    }
     std::unique_ptr< ::grpc::ClientWriterInterface< ::cpp_chat::User>> reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response) {
       return std::unique_ptr< ::grpc::ClientWriterInterface< ::cpp_chat::User>>(reLoginRaw(context, response));
     }
@@ -61,14 +52,37 @@ class chat final {
     std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::cpp_chat::User>> PrepareAsyncreLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::cpp_chat::User>>(PrepareAsyncreLoginRaw(context, response, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> enterChatRoom(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(enterChatRoomRaw(context));
+    virtual ::grpc::Status createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::cpp_chat::SimpleResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>> AsynccreateChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>>(AsynccreateChatRoomRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> AsyncenterChatRoom(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(AsyncenterChatRoomRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>> PrepareAsynccreateChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>>(PrepareAsynccreateChatRoomRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> PrepareAsyncenterChatRoom(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(PrepareAsyncenterChatRoomRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::cpp_chat::ChatRoom>> chatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::cpp_chat::ChatRoom>>(chatRoomListRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>> AsyncchatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>>(AsyncchatRoomListRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>> PrepareAsyncchatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>>(PrepareAsyncchatRoomListRaw(context, request, cq));
+    }
+    virtual ::grpc::Status enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::cpp_chat::SimpleResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>> AsyncenterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>>(AsyncenterChatRoomRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>> PrepareAsyncenterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>>(PrepareAsyncenterChatRoomRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> chatting(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(chattingRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> Asyncchatting(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(AsyncchattingRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>> PrepareAsyncchatting(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>>(PrepareAsyncchattingRaw(context, cq));
     }
     class experimental_async_interface {
      public:
@@ -86,19 +100,43 @@ class chat final {
       virtual void login(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void userList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::ClientReadReactor< ::cpp_chat::User>* reactor) = 0;
-      #else
-      virtual void userList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::experimental::ClientReadReactor< ::cpp_chat::User>* reactor) = 0;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       virtual void reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::ClientWriteReactor< ::cpp_chat::User>* reactor) = 0;
       #else
       virtual void reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientWriteReactor< ::cpp_chat::User>* reactor) = 0;
       #endif
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) = 0;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void enterChatRoom(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) = 0;
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       #else
-      virtual void enterChatRoom(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) = 0;
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void chatRoomList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::ClientReadReactor< ::cpp_chat::ChatRoom>* reactor) = 0;
+      #else
+      virtual void chatRoomList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::experimental::ClientReadReactor< ::cpp_chat::ChatRoom>* reactor) = 0;
+      #endif
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void chatting(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) = 0;
+      #else
+      virtual void chatting(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) = 0;
       #endif
     };
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -111,15 +149,19 @@ class chat final {
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* AsyncloginRaw(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* PrepareAsyncloginRaw(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientReaderInterface< ::cpp_chat::User>* userListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) = 0;
-    virtual ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>* AsyncuserListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderInterface< ::cpp_chat::User>* PrepareAsyncuserListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientWriterInterface< ::cpp_chat::User>* reLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response) = 0;
     virtual ::grpc::ClientAsyncWriterInterface< ::cpp_chat::User>* AsyncreLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncWriterInterface< ::cpp_chat::User>* PrepareAsyncreLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* enterChatRoomRaw(::grpc::ClientContext* context) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* AsyncenterChatRoomRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* PrepareAsyncenterChatRoomRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* AsynccreateChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* PrepareAsynccreateChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::cpp_chat::ChatRoom>* chatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>* AsyncchatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::cpp_chat::ChatRoom>* PrepareAsyncchatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* AsyncenterChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::cpp_chat::SimpleResponse>* PrepareAsyncenterChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* chattingRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* AsyncchattingRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::cpp_chat::Message, ::cpp_chat::Message>* PrepareAsyncchattingRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -131,15 +173,6 @@ class chat final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>> PrepareAsynclogin(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>>(PrepareAsyncloginRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientReader< ::cpp_chat::User>> userList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) {
-      return std::unique_ptr< ::grpc::ClientReader< ::cpp_chat::User>>(userListRaw(context, request));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::User>> AsyncuserList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::User>>(AsyncuserListRaw(context, request, cq, tag));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::User>> PrepareAsyncuserList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::User>>(PrepareAsyncuserListRaw(context, request, cq));
-    }
     std::unique_ptr< ::grpc::ClientWriter< ::cpp_chat::User>> reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response) {
       return std::unique_ptr< ::grpc::ClientWriter< ::cpp_chat::User>>(reLoginRaw(context, response));
     }
@@ -149,14 +182,37 @@ class chat final {
     std::unique_ptr< ::grpc::ClientAsyncWriter< ::cpp_chat::User>> PrepareAsyncreLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncWriter< ::cpp_chat::User>>(PrepareAsyncreLoginRaw(context, response, cq));
     }
-    std::unique_ptr< ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> enterChatRoom(::grpc::ClientContext* context) {
-      return std::unique_ptr< ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(enterChatRoomRaw(context));
+    ::grpc::Status createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::cpp_chat::SimpleResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>> AsynccreateChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>>(AsynccreateChatRoomRaw(context, request, cq));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> AsyncenterChatRoom(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(AsyncenterChatRoomRaw(context, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>> PrepareAsynccreateChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>>(PrepareAsynccreateChatRoomRaw(context, request, cq));
     }
-    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> PrepareAsyncenterChatRoom(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(PrepareAsyncenterChatRoomRaw(context, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::cpp_chat::ChatRoom>> chatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::cpp_chat::ChatRoom>>(chatRoomListRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>> AsyncchatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>>(AsyncchatRoomListRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>> PrepareAsyncchatRoomList(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>>(PrepareAsyncchatRoomListRaw(context, request, cq));
+    }
+    ::grpc::Status enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::cpp_chat::SimpleResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>> AsyncenterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>>(AsyncenterChatRoomRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>> PrepareAsyncenterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>>(PrepareAsyncenterChatRoomRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> chatting(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(chattingRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> Asyncchatting(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(AsyncchattingRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>> PrepareAsyncchatting(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>>(PrepareAsyncchattingRaw(context, cq));
     }
     class experimental_async final :
       public StubInterface::experimental_async_interface {
@@ -174,19 +230,43 @@ class chat final {
       void login(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void userList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::ClientReadReactor< ::cpp_chat::User>* reactor) override;
-      #else
-      void userList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::experimental::ClientReadReactor< ::cpp_chat::User>* reactor) override;
-      #endif
-      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       void reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::ClientWriteReactor< ::cpp_chat::User>* reactor) override;
       #else
       void reLogin(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientWriteReactor< ::cpp_chat::User>* reactor) override;
       #endif
+      void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) override;
+      void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) override;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void enterChatRoom(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) override;
+      void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
       #else
-      void enterChatRoom(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) override;
+      void createChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void createChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void chatRoomList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::ClientReadReactor< ::cpp_chat::ChatRoom>* reactor) override;
+      #else
+      void chatRoomList(::grpc::ClientContext* context, ::cpp_chat::Empty* request, ::grpc::experimental::ClientReadReactor< ::cpp_chat::ChatRoom>* reactor) override;
+      #endif
+      void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) override;
+      void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void enterChatRoom(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void enterChatRoom(::grpc::ClientContext* context, const ::grpc::ByteBuffer* request, ::cpp_chat::SimpleResponse* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void chatting(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) override;
+      #else
+      void chatting(::grpc::ClientContext* context, ::grpc::experimental::ClientBidiReactor< ::cpp_chat::Message,::cpp_chat::Message>* reactor) override;
       #endif
      private:
       friend class Stub;
@@ -201,19 +281,25 @@ class chat final {
     class experimental_async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* AsyncloginRaw(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* PrepareAsyncloginRaw(::grpc::ClientContext* context, const ::cpp_chat::User& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientReader< ::cpp_chat::User>* userListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) override;
-    ::grpc::ClientAsyncReader< ::cpp_chat::User>* AsyncuserListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReader< ::cpp_chat::User>* PrepareAsyncuserListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientWriter< ::cpp_chat::User>* reLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response) override;
     ::grpc::ClientAsyncWriter< ::cpp_chat::User>* AsyncreLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncWriter< ::cpp_chat::User>* PrepareAsyncreLoginRaw(::grpc::ClientContext* context, ::cpp_chat::SimpleResponse* response, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* enterChatRoomRaw(::grpc::ClientContext* context) override;
-    ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* AsyncenterChatRoomRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* PrepareAsyncenterChatRoomRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* AsynccreateChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* PrepareAsynccreateChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::cpp_chat::ChatRoom>* chatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request) override;
+    ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>* AsyncchatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::cpp_chat::ChatRoom>* PrepareAsyncchatRoomListRaw(::grpc::ClientContext* context, const ::cpp_chat::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* AsyncenterChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::cpp_chat::SimpleResponse>* PrepareAsyncenterChatRoomRaw(::grpc::ClientContext* context, const ::cpp_chat::ChatRoom& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* chattingRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* AsyncchattingRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* PrepareAsyncchattingRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_login_;
-    const ::grpc::internal::RpcMethod rpcmethod_userList_;
     const ::grpc::internal::RpcMethod rpcmethod_reLogin_;
+    const ::grpc::internal::RpcMethod rpcmethod_createChatRoom_;
+    const ::grpc::internal::RpcMethod rpcmethod_chatRoomList_;
     const ::grpc::internal::RpcMethod rpcmethod_enterChatRoom_;
+    const ::grpc::internal::RpcMethod rpcmethod_chatting_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -222,9 +308,11 @@ class chat final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status login(::grpc::ServerContext* context, const ::cpp_chat::User* request, ::cpp_chat::SimpleResponse* response);
-    virtual ::grpc::Status userList(::grpc::ServerContext* context, const ::cpp_chat::Empty* request, ::grpc::ServerWriter< ::cpp_chat::User>* writer);
     virtual ::grpc::Status reLogin(::grpc::ServerContext* context, ::grpc::ServerReader< ::cpp_chat::User>* reader, ::cpp_chat::SimpleResponse* response);
-    virtual ::grpc::Status enterChatRoom(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* stream);
+    virtual ::grpc::Status createChatRoom(::grpc::ServerContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response);
+    virtual ::grpc::Status chatRoomList(::grpc::ServerContext* context, const ::cpp_chat::Empty* request, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* writer);
+    virtual ::grpc::Status enterChatRoom(::grpc::ServerContext* context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response);
+    virtual ::grpc::Status chatting(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_login : public BaseClass {
@@ -247,32 +335,12 @@ class chat final {
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_userList : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithAsyncMethod_userList() {
-      ::grpc::Service::MarkMethodAsync(1);
-    }
-    ~WithAsyncMethod_userList() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestuserList(::grpc::ServerContext* context, ::cpp_chat::Empty* request, ::grpc::ServerAsyncWriter< ::cpp_chat::User>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithAsyncMethod_reLogin : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_reLogin() {
-      ::grpc::Service::MarkMethodAsync(2);
+      ::grpc::Service::MarkMethodAsync(1);
     }
     ~WithAsyncMethod_reLogin() override {
       BaseClassMustBeDerivedFromService(this);
@@ -283,7 +351,47 @@ class chat final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestreLogin(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::cpp_chat::SimpleResponse, ::cpp_chat::User>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncClientStreaming(1, context, reader, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_createChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_createChatRoom() {
+      ::grpc::Service::MarkMethodAsync(2);
+    }
+    ~WithAsyncMethod_createChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestcreateChatRoom(::grpc::ServerContext* context, ::cpp_chat::ChatRoom* request, ::grpc::ServerAsyncResponseWriter< ::cpp_chat::SimpleResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_chatRoomList() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestchatRoomList(::grpc::ServerContext* context, ::cpp_chat::Empty* request, ::grpc::ServerAsyncWriter< ::cpp_chat::ChatRoom>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(3, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -292,21 +400,41 @@ class chat final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_enterChatRoom() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_enterChatRoom() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestenterChatRoom(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncBidiStreaming(3, context, stream, new_call_cq, notification_cq, tag);
+    void RequestenterChatRoom(::grpc::ServerContext* context, ::cpp_chat::ChatRoom* request, ::grpc::ServerAsyncResponseWriter< ::cpp_chat::SimpleResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_login<WithAsyncMethod_userList<WithAsyncMethod_reLogin<WithAsyncMethod_enterChatRoom<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_chatting : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_chatting() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_chatting() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatting(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestchatting(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(5, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_login<WithAsyncMethod_reLogin<WithAsyncMethod_createChatRoom<WithAsyncMethod_chatRoomList<WithAsyncMethod_enterChatRoom<WithAsyncMethod_chatting<Service > > > > > > AsyncService;
   template <class BaseClass>
   class ExperimentalWithCallbackMethod_login : public BaseClass {
    private:
@@ -355,44 +483,6 @@ class chat final {
       { return nullptr; }
   };
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_userList : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithCallbackMethod_userList() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodCallback(1,
-          new ::grpc_impl::internal::CallbackServerStreamingHandler< ::cpp_chat::Empty, ::cpp_chat::User>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const ::cpp_chat::Empty* request) { return this->userList(context, request); }));
-    }
-    ~ExperimentalWithCallbackMethod_userList() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerWriteReactor< ::cpp_chat::User>* userList(
-      ::grpc::CallbackServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/)
-    #else
-    virtual ::grpc::experimental::ServerWriteReactor< ::cpp_chat::User>* userList(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
   class ExperimentalWithCallbackMethod_reLogin : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -403,7 +493,7 @@ class chat final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(2,
+        MarkMethodCallback(1,
           new ::grpc_impl::internal::CallbackClientStreamingHandler< ::cpp_chat::User, ::cpp_chat::SimpleResponse>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -431,6 +521,91 @@ class chat final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithCallbackMethod_createChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_createChatRoom() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(2,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response) { return this->createChatRoom(context, request, response); }));}
+    void SetMessageAllocatorFor_createChatRoom(
+        ::grpc::experimental::MessageAllocator< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(2);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_createChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* createChatRoom(
+      ::grpc::CallbackServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* createChatRoom(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_chatRoomList() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(3,
+          new ::grpc_impl::internal::CallbackServerStreamingHandler< ::cpp_chat::Empty, ::cpp_chat::ChatRoom>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::cpp_chat::Empty* request) { return this->chatRoomList(context, request); }));
+    }
+    ~ExperimentalWithCallbackMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerWriteReactor< ::cpp_chat::ChatRoom>* chatRoomList(
+      ::grpc::CallbackServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/)
+    #else
+    virtual ::grpc::experimental::ServerWriteReactor< ::cpp_chat::ChatRoom>* chatRoomList(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithCallbackMethod_enterChatRoom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -441,7 +616,54 @@ class chat final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodCallback(3,
+        MarkMethodCallback(4,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::cpp_chat::ChatRoom* request, ::cpp_chat::SimpleResponse* response) { return this->enterChatRoom(context, request, response); }));}
+    void SetMessageAllocatorFor_enterChatRoom(
+        ::grpc::experimental::MessageAllocator< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(4);
+    #endif
+      static_cast<::grpc_impl::internal::CallbackUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_enterChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* enterChatRoom(
+      ::grpc::CallbackServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* enterChatRoom(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_chatting : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_chatting() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(5,
           new ::grpc_impl::internal::CallbackBidiHandler< ::cpp_chat::Message, ::cpp_chat::Message>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -449,30 +671,30 @@ class chat final {
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context) { return this->enterChatRoom(context); }));
+                     context) { return this->chatting(context); }));
     }
-    ~ExperimentalWithCallbackMethod_enterChatRoom() override {
+    ~ExperimentalWithCallbackMethod_chatting() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+    ::grpc::Status chatting(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerBidiReactor< ::cpp_chat::Message, ::cpp_chat::Message>* enterChatRoom(
+    virtual ::grpc::ServerBidiReactor< ::cpp_chat::Message, ::cpp_chat::Message>* chatting(
       ::grpc::CallbackServerContext* /*context*/)
     #else
-    virtual ::grpc::experimental::ServerBidiReactor< ::cpp_chat::Message, ::cpp_chat::Message>* enterChatRoom(
+    virtual ::grpc::experimental::ServerBidiReactor< ::cpp_chat::Message, ::cpp_chat::Message>* chatting(
       ::grpc::experimental::CallbackServerContext* /*context*/)
     #endif
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_login<ExperimentalWithCallbackMethod_userList<ExperimentalWithCallbackMethod_reLogin<ExperimentalWithCallbackMethod_enterChatRoom<Service > > > > CallbackService;
+  typedef ExperimentalWithCallbackMethod_login<ExperimentalWithCallbackMethod_reLogin<ExperimentalWithCallbackMethod_createChatRoom<ExperimentalWithCallbackMethod_chatRoomList<ExperimentalWithCallbackMethod_enterChatRoom<ExperimentalWithCallbackMethod_chatting<Service > > > > > > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_login<ExperimentalWithCallbackMethod_userList<ExperimentalWithCallbackMethod_reLogin<ExperimentalWithCallbackMethod_enterChatRoom<Service > > > > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_login<ExperimentalWithCallbackMethod_reLogin<ExperimentalWithCallbackMethod_createChatRoom<ExperimentalWithCallbackMethod_chatRoomList<ExperimentalWithCallbackMethod_enterChatRoom<ExperimentalWithCallbackMethod_chatting<Service > > > > > > ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_login : public BaseClass {
    private:
@@ -491,29 +713,12 @@ class chat final {
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_userList : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithGenericMethod_userList() {
-      ::grpc::Service::MarkMethodGeneric(1);
-    }
-    ~WithGenericMethod_userList() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
-  template <class BaseClass>
   class WithGenericMethod_reLogin : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_reLogin() {
-      ::grpc::Service::MarkMethodGeneric(2);
+      ::grpc::Service::MarkMethodGeneric(1);
     }
     ~WithGenericMethod_reLogin() override {
       BaseClassMustBeDerivedFromService(this);
@@ -525,18 +730,69 @@ class chat final {
     }
   };
   template <class BaseClass>
+  class WithGenericMethod_createChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_createChatRoom() {
+      ::grpc::Service::MarkMethodGeneric(2);
+    }
+    ~WithGenericMethod_createChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_chatRoomList() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
   class WithGenericMethod_enterChatRoom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_enterChatRoom() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_enterChatRoom() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_chatting : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_chatting() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_chatting() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatting(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -562,32 +818,12 @@ class chat final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_userList : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_userList() {
-      ::grpc::Service::MarkMethodRaw(1);
-    }
-    ~WithRawMethod_userList() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestuserList(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncServerStreaming(1, context, request, writer, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithRawMethod_reLogin : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_reLogin() {
-      ::grpc::Service::MarkMethodRaw(2);
+      ::grpc::Service::MarkMethodRaw(1);
     }
     ~WithRawMethod_reLogin() override {
       BaseClassMustBeDerivedFromService(this);
@@ -598,7 +834,47 @@ class chat final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestreLogin(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(2, context, reader, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncClientStreaming(1, context, reader, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_createChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_createChatRoom() {
+      ::grpc::Service::MarkMethodRaw(2);
+    }
+    ~WithRawMethod_createChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestcreateChatRoom(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_chatRoomList() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestchatRoomList(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(3, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -607,18 +883,38 @@ class chat final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_enterChatRoom() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_enterChatRoom() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestenterChatRoom(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncBidiStreaming(3, context, stream, new_call_cq, notification_cq, tag);
+    void RequestenterChatRoom(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_chatting : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_chatting() {
+      ::grpc::Service::MarkMethodRaw(5);
+    }
+    ~WithRawMethod_chatting() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatting(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void Requestchatting(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(5, context, stream, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -660,44 +956,6 @@ class chat final {
       { return nullptr; }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_userList : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    ExperimentalWithRawCallbackMethod_userList() {
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      ::grpc::Service::
-    #else
-      ::grpc::Service::experimental().
-    #endif
-        MarkMethodRawCallback(1,
-          new ::grpc_impl::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-                   ::grpc::CallbackServerContext*
-    #else
-                   ::grpc::experimental::CallbackServerContext*
-    #endif
-                     context, const::grpc::ByteBuffer* request) { return this->userList(context, request); }));
-    }
-    ~ExperimentalWithRawCallbackMethod_userList() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* userList(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)
-    #else
-    virtual ::grpc::experimental::ServerWriteReactor< ::grpc::ByteBuffer>* userList(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)
-    #endif
-      { return nullptr; }
-  };
-  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_reLogin : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -708,7 +966,7 @@ class chat final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(2,
+        MarkMethodRawCallback(1,
           new ::grpc_impl::internal::CallbackClientStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -736,6 +994,82 @@ class chat final {
       { return nullptr; }
   };
   template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_createChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_createChatRoom() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(2,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->createChatRoom(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_createChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* createChatRoom(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* createChatRoom(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_chatRoomList() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(3,
+          new ::grpc_impl::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const::grpc::ByteBuffer* request) { return this->chatRoomList(context, request); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* chatRoomList(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)
+    #else
+    virtual ::grpc::experimental::ServerWriteReactor< ::grpc::ByteBuffer>* chatRoomList(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
   class ExperimentalWithRawCallbackMethod_enterChatRoom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -746,7 +1080,45 @@ class chat final {
     #else
       ::grpc::Service::experimental().
     #endif
-        MarkMethodRawCallback(3,
+        MarkMethodRawCallback(4,
+          new ::grpc_impl::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->enterChatRoom(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_enterChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* enterChatRoom(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* enterChatRoom(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_chatting : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_chatting() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(5,
           new ::grpc_impl::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -754,21 +1126,21 @@ class chat final {
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context) { return this->enterChatRoom(context); }));
+                     context) { return this->chatting(context); }));
     }
-    ~ExperimentalWithRawCallbackMethod_enterChatRoom() override {
+    ~ExperimentalWithRawCallbackMethod_chatting() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
+    ::grpc::Status chatting(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::cpp_chat::Message, ::cpp_chat::Message>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* enterChatRoom(
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* chatting(
       ::grpc::CallbackServerContext* /*context*/)
     #else
-    virtual ::grpc::experimental::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* enterChatRoom(
+    virtual ::grpc::experimental::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* chatting(
       ::grpc::experimental::CallbackServerContext* /*context*/)
     #endif
       { return nullptr; }
@@ -793,29 +1165,69 @@ class chat final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status Streamedlogin(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::cpp_chat::User,::cpp_chat::SimpleResponse>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_login<Service > StreamedUnaryService;
   template <class BaseClass>
-  class WithSplitStreamingMethod_userList : public BaseClass {
+  class WithStreamedUnaryMethod_createChatRoom : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithSplitStreamingMethod_userList() {
-      ::grpc::Service::MarkMethodStreamed(1,
-        new ::grpc::internal::SplitServerStreamingHandler< ::cpp_chat::Empty, ::cpp_chat::User>(std::bind(&WithSplitStreamingMethod_userList<BaseClass>::StreameduserList, this, std::placeholders::_1, std::placeholders::_2)));
+    WithStreamedUnaryMethod_createChatRoom() {
+      ::grpc::Service::MarkMethodStreamed(2,
+        new ::grpc::internal::StreamedUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>(std::bind(&WithStreamedUnaryMethod_createChatRoom<BaseClass>::StreamedcreateChatRoom, this, std::placeholders::_1, std::placeholders::_2)));
     }
-    ~WithSplitStreamingMethod_userList() override {
+    ~WithStreamedUnaryMethod_createChatRoom() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status userList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::User>* /*writer*/) override {
+    ::grpc::Status createChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedcreateChatRoom(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::cpp_chat::ChatRoom,::cpp_chat::SimpleResponse>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_enterChatRoom : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_enterChatRoom() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler< ::cpp_chat::ChatRoom, ::cpp_chat::SimpleResponse>(std::bind(&WithStreamedUnaryMethod_enterChatRoom<BaseClass>::StreamedenterChatRoom, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithStreamedUnaryMethod_enterChatRoom() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status enterChatRoom(::grpc::ServerContext* /*context*/, const ::cpp_chat::ChatRoom* /*request*/, ::cpp_chat::SimpleResponse* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedenterChatRoom(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::cpp_chat::ChatRoom,::cpp_chat::SimpleResponse>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_login<WithStreamedUnaryMethod_createChatRoom<WithStreamedUnaryMethod_enterChatRoom<Service > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_chatRoomList : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_chatRoomList() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::SplitServerStreamingHandler< ::cpp_chat::Empty, ::cpp_chat::ChatRoom>(std::bind(&WithSplitStreamingMethod_chatRoomList<BaseClass>::StreamedchatRoomList, this, std::placeholders::_1, std::placeholders::_2)));
+    }
+    ~WithSplitStreamingMethod_chatRoomList() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status chatRoomList(::grpc::ServerContext* /*context*/, const ::cpp_chat::Empty* /*request*/, ::grpc::ServerWriter< ::cpp_chat::ChatRoom>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with split streamed
-    virtual ::grpc::Status StreameduserList(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::cpp_chat::Empty,::cpp_chat::User>* server_split_streamer) = 0;
+    virtual ::grpc::Status StreamedchatRoomList(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::cpp_chat::Empty,::cpp_chat::ChatRoom>* server_split_streamer) = 0;
   };
-  typedef WithSplitStreamingMethod_userList<Service > SplitStreamedService;
-  typedef WithStreamedUnaryMethod_login<WithSplitStreamingMethod_userList<Service > > StreamedService;
+  typedef WithSplitStreamingMethod_chatRoomList<Service > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_login<WithStreamedUnaryMethod_createChatRoom<WithSplitStreamingMethod_chatRoomList<WithStreamedUnaryMethod_enterChatRoom<Service > > > > StreamedService;
 };
 
 }  // namespace cpp_chat

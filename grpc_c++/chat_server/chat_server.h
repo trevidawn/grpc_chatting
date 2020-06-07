@@ -4,6 +4,13 @@
 #include "../protos/gen/cpp/chat.grpc.pb.h"
 #include "chat_dbaccessor.h"
 
+typedef struct chat_Room {
+    std::string room_name;
+    std::vector<cpp_chat::Message> messages;
+    std::set<std::string> userList;
+} Chat_Room;
+
+
 class ChatServiceImpl final : public cpp_chat::chat::Service {
 public:
     ChatServiceImpl() : dbAccessorClient(grpc::CreateChannel("localhost:50052", grpc::InsecureChannelCredentials())) {};
@@ -12,23 +19,28 @@ public:
     login(grpc::ServerContext *context, const cpp_chat::User *user, cpp_chat::SimpleResponse *sr) override;
 
     grpc::Status
-    userList(grpc::ServerContext *context, const cpp_chat::Empty *empty,
-             grpc::ServerWriter<cpp_chat::User> *writer) override;
+    reLogin(grpc::ServerContext *context, grpc::ServerReader<cpp_chat::User> *reader, cpp_chat::SimpleResponse *sr) override;
 
     grpc::Status
-    reLogin(grpc::ServerContext *context, grpc::ServerReader<cpp_chat::User> *reader,
-            cpp_chat::SimpleResponse *sr) override;
+    chatRoomList(grpc::ServerContext *context, const cpp_chat::Empty *empty, grpc::ServerWriter<cpp_chat::ChatRoom> *writer) override;
 
     grpc::Status
-    enterChatRoom(grpc::ServerContext *context,
-                  grpc::ServerReaderWriter<cpp_chat::Message, cpp_chat::Message> *stream) override;
+    createChatRoom(grpc::ServerContext *context, const cpp_chat::ChatRoom *chatRoom, cpp_chat::SimpleResponse *sr) override;
 
-    void printMetadata(grpc::ServerContext *context);
+    grpc::Status
+    enterChatRoom(grpc::ServerContext *context, const cpp_chat::ChatRoom *chatRoom, cpp_chat::SimpleResponse *sr) override;
+
+    grpc::Status
+    chatting(grpc::ServerContext *context, grpc::ServerReaderWriter<cpp_chat::Message, cpp_chat::Message> *stream) override;
+
+    std::string printMetadata(grpc::ServerContext *context);
     std::string getTimeStr();
 
 private:
-    std::vector<cpp_chat::Message> v;
-    std::set<std::string> userIdList;
+    std::map<std::string, Chat_Room> rooms;
+    std::map<std::string, std::string> user_room_mapper;
+    //std::vector<cpp_chat::Message> v;
+    //std::set<std::string> userIdList;
 
     DbAccessorClient dbAccessorClient;
 };

@@ -22,13 +22,17 @@ int main(int argc, char **argv) {
                 break;
             case 2:
                 system("clear");
-                chatView.userListView();
+                chatView.chatRoomListView();
                 break;
             case 3:
                 system("clear");
-                chatView.chatRoomView();
+                chatView.createChatRoomView();
                 break;
             case 4:
+                system("clear");
+                chatView.chatRoomView();
+                break;
+            case 5:
                 cout << "채팅 프로그램 종료" << endl;
                 flag = false;
                 break;

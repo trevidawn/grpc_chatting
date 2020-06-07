@@ -47,7 +47,7 @@ struct TableStruct_chat_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[4]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[5]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -55,6 +55,9 @@ struct TableStruct_chat_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_chat_2eproto;
 namespace cpp_chat {
+class ChatRoom;
+class ChatRoomDefaultTypeInternal;
+extern ChatRoomDefaultTypeInternal _ChatRoom_default_instance_;
 class Empty;
 class EmptyDefaultTypeInternal;
 extern EmptyDefaultTypeInternal _Empty_default_instance_;
@@ -69,6 +72,7 @@ class UserDefaultTypeInternal;
 extern UserDefaultTypeInternal _User_default_instance_;
 }  // namespace cpp_chat
 PROTOBUF_NAMESPACE_OPEN
+template<> ::cpp_chat::ChatRoom* Arena::CreateMaybeMessage<::cpp_chat::ChatRoom>(Arena*);
 template<> ::cpp_chat::Empty* Arena::CreateMaybeMessage<::cpp_chat::Empty>(Arena*);
 template<> ::cpp_chat::Message* Arena::CreateMaybeMessage<::cpp_chat::Message>(Arena*);
 template<> ::cpp_chat::SimpleResponse* Arena::CreateMaybeMessage<::cpp_chat::SimpleResponse>(Arena*);
@@ -346,6 +350,158 @@ class Message :
 };
 // -------------------------------------------------------------------
 
+class ChatRoom :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:cpp_chat.ChatRoom) */ {
+ public:
+  ChatRoom();
+  virtual ~ChatRoom();
+
+  ChatRoom(const ChatRoom& from);
+  ChatRoom(ChatRoom&& from) noexcept
+    : ChatRoom() {
+    *this = ::std::move(from);
+  }
+
+  inline ChatRoom& operator=(const ChatRoom& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ChatRoom& operator=(ChatRoom&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ChatRoom& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ChatRoom* internal_default_instance() {
+    return reinterpret_cast<const ChatRoom*>(
+               &_ChatRoom_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(ChatRoom& a, ChatRoom& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ChatRoom* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ChatRoom* New() const final {
+    return CreateMaybeMessage<ChatRoom>(nullptr);
+  }
+
+  ChatRoom* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ChatRoom>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ChatRoom& from);
+  void MergeFrom(const ChatRoom& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ChatRoom* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "cpp_chat.ChatRoom";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_chat_2eproto);
+    return ::descriptor_table_chat_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRoomNameFieldNumber = 1,
+    kUserFieldNumber = 2,
+  };
+  // string room_name = 1;
+  void clear_room_name();
+  const std::string& room_name() const;
+  void set_room_name(const std::string& value);
+  void set_room_name(std::string&& value);
+  void set_room_name(const char* value);
+  void set_room_name(const char* value, size_t size);
+  std::string* mutable_room_name();
+  std::string* release_room_name();
+  void set_allocated_room_name(std::string* room_name);
+  private:
+  const std::string& _internal_room_name() const;
+  void _internal_set_room_name(const std::string& value);
+  std::string* _internal_mutable_room_name();
+  public:
+
+  // .cpp_chat.User user = 2;
+  bool has_user() const;
+  private:
+  bool _internal_has_user() const;
+  public:
+  void clear_user();
+  const ::cpp_chat::User& user() const;
+  ::cpp_chat::User* release_user();
+  ::cpp_chat::User* mutable_user();
+  void set_allocated_user(::cpp_chat::User* user);
+  private:
+  const ::cpp_chat::User& _internal_user() const;
+  ::cpp_chat::User* _internal_mutable_user();
+  public:
+
+  // @@protoc_insertion_point(class_scope:cpp_chat.ChatRoom)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr room_name_;
+  ::cpp_chat::User* user_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_chat_2eproto;
+};
+// -------------------------------------------------------------------
+
 class User :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:cpp_chat.User) */ {
  public:
@@ -388,7 +544,7 @@ class User :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -523,7 +679,7 @@ class SimpleResponse :
                &_SimpleResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(SimpleResponse& a, SimpleResponse& b) {
     a.Swap(&b);
@@ -744,6 +900,130 @@ inline void Message::set_allocated_text(std::string* text) {
 
 // -------------------------------------------------------------------
 
+// ChatRoom
+
+// string room_name = 1;
+inline void ChatRoom::clear_room_name() {
+  room_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& ChatRoom::room_name() const {
+  // @@protoc_insertion_point(field_get:cpp_chat.ChatRoom.room_name)
+  return _internal_room_name();
+}
+inline void ChatRoom::set_room_name(const std::string& value) {
+  _internal_set_room_name(value);
+  // @@protoc_insertion_point(field_set:cpp_chat.ChatRoom.room_name)
+}
+inline std::string* ChatRoom::mutable_room_name() {
+  // @@protoc_insertion_point(field_mutable:cpp_chat.ChatRoom.room_name)
+  return _internal_mutable_room_name();
+}
+inline const std::string& ChatRoom::_internal_room_name() const {
+  return room_name_.GetNoArena();
+}
+inline void ChatRoom::_internal_set_room_name(const std::string& value) {
+  
+  room_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+}
+inline void ChatRoom::set_room_name(std::string&& value) {
+  
+  room_name_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:cpp_chat.ChatRoom.room_name)
+}
+inline void ChatRoom::set_room_name(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  room_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:cpp_chat.ChatRoom.room_name)
+}
+inline void ChatRoom::set_room_name(const char* value, size_t size) {
+  
+  room_name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:cpp_chat.ChatRoom.room_name)
+}
+inline std::string* ChatRoom::_internal_mutable_room_name() {
+  
+  return room_name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ChatRoom::release_room_name() {
+  // @@protoc_insertion_point(field_release:cpp_chat.ChatRoom.room_name)
+  
+  return room_name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ChatRoom::set_allocated_room_name(std::string* room_name) {
+  if (room_name != nullptr) {
+    
+  } else {
+    
+  }
+  room_name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), room_name);
+  // @@protoc_insertion_point(field_set_allocated:cpp_chat.ChatRoom.room_name)
+}
+
+// .cpp_chat.User user = 2;
+inline bool ChatRoom::_internal_has_user() const {
+  return this != internal_default_instance() && user_ != nullptr;
+}
+inline bool ChatRoom::has_user() const {
+  return _internal_has_user();
+}
+inline void ChatRoom::clear_user() {
+  if (GetArenaNoVirtual() == nullptr && user_ != nullptr) {
+    delete user_;
+  }
+  user_ = nullptr;
+}
+inline const ::cpp_chat::User& ChatRoom::_internal_user() const {
+  const ::cpp_chat::User* p = user_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::cpp_chat::User*>(
+      &::cpp_chat::_User_default_instance_);
+}
+inline const ::cpp_chat::User& ChatRoom::user() const {
+  // @@protoc_insertion_point(field_get:cpp_chat.ChatRoom.user)
+  return _internal_user();
+}
+inline ::cpp_chat::User* ChatRoom::release_user() {
+  // @@protoc_insertion_point(field_release:cpp_chat.ChatRoom.user)
+  
+  ::cpp_chat::User* temp = user_;
+  user_ = nullptr;
+  return temp;
+}
+inline ::cpp_chat::User* ChatRoom::_internal_mutable_user() {
+  
+  if (user_ == nullptr) {
+    auto* p = CreateMaybeMessage<::cpp_chat::User>(GetArenaNoVirtual());
+    user_ = p;
+  }
+  return user_;
+}
+inline ::cpp_chat::User* ChatRoom::mutable_user() {
+  // @@protoc_insertion_point(field_mutable:cpp_chat.ChatRoom.user)
+  return _internal_mutable_user();
+}
+inline void ChatRoom::set_allocated_user(::cpp_chat::User* user) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete user_;
+  }
+  if (user) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      user = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, user, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  user_ = user;
+  // @@protoc_insertion_point(field_set_allocated:cpp_chat.ChatRoom.user)
+}
+
+// -------------------------------------------------------------------
+
 // User
 
 // string user_id = 1;
@@ -833,6 +1113,8 @@ inline void SimpleResponse::set_responseflag(bool value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

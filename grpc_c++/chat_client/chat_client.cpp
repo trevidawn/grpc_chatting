@@ -85,15 +85,15 @@ void ChatClient::reLogin(const string input_user_id) {
     return;
 }
 
-void ChatClient::userList() {
+void ChatClient::chatRoomList() {
     grpc::ClientContext context;
-    cpp_chat::User user;
     cpp_chat::Empty empty;
+    cpp_chat::ChatRoom chatRoom;
 
-    unique_ptr<grpc::ClientReader<cpp_chat::User> > reader(stub_->userList(&context, empty));
+    unique_ptr<grpc::ClientReader<cpp_chat::ChatRoom> > reader(stub_->chatRoomList(&context, empty));
 
-    while(reader->Read(&user)) {
-        cout << user.user_id() << endl;
+    while(reader->Read(&chatRoom)) {
+        cout << chatRoom.room_name() << endl;
     }
     cout << endl;
 
@@ -103,12 +103,62 @@ void ChatClient::userList() {
     }
 }
 
-void ChatClient::enterChatRoom() {
+void ChatClient::createChatRoom(string chatRoomName) {
     grpc::ClientContext context;
-    context.AddMetadata("user_id", user_id);
+    cpp_chat::ChatRoom chatRoom;
+    cpp_chat::SimpleResponse sr;
 
+    chatRoom.set_room_name(chatRoomName);
+
+    grpc::Status status = stub_->createChatRoom(&context, chatRoom, &sr);
+    if(!status.ok()) {
+        cout << "createChatRoom rpc failed" << endl;
+        this_thread::sleep_for(chrono::milliseconds(700));
+        return;
+    }
+
+    if(!sr.responseflag()) {
+        cout << "같은 이름의 채팅방이 존재합니다." << endl;
+        this_thread::sleep_for(chrono::milliseconds(700));
+        return;
+    }
+
+    cout << "채팅방 생성 성공!" << endl;
+    this_thread::sleep_for(chrono::milliseconds(700));
+    return;
+}
+
+void ChatClient::enterChatRoom(std::string chatRoomName) {
+    grpc::ClientContext context;
+
+    cpp_chat::ChatRoom chatRoom;
+    cpp_chat::SimpleResponse sr;
+    chatRoom.mutable_user()->set_user_id(user_id);
+    chatRoom.set_room_name(chatRoomName);
+
+    grpc::Status status;
+    status = stub_->enterChatRoom(&context, chatRoom, &sr);
+    if(!status.ok()) {
+        cout << "enterChatRoom rpc failed" << endl;
+        this_thread::sleep_for(chrono::milliseconds(700));
+        return;
+    }
+
+    if(!sr.responseflag()) {
+        cout << "채팅방이 존재하지 않습니다." << endl;
+        this_thread::sleep_for(chrono::milliseconds(700));
+        return;
+    }
+
+    chatting();
+}
+
+void ChatClient::chatting() {
+    grpc::ClientContext context;
+
+    context.AddMetadata("user_id", user_id);
     shared_ptr<grpc::ClientReaderWriter < cpp_chat::Message, cpp_chat::Message> > stream(
-            stub_->enterChatRoom(&context));
+            stub_->chatting(&context));
 
     cpp_chat::Message message;
     mutex m;
