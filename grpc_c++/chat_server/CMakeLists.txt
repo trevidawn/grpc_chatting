@@ -61,7 +61,7 @@ add_custom_command(
         DEPENDS "${chat_proto}")
 
 add_custom_command(
-        OUTPUT "${dbaccessor_proto_path}" "${dbaccessor_proto_path}" "${dbaccessor_proto_path}" "${dbaccessor_proto_path}"
+        OUTPUT "${dbaccessor_proto_srcs}" "${dbaccessor_proto_hdrs}" "${dbaccessor_grpc_srcs}" "${dbaccessor_grpc_hdrs}"
         COMMAND ${_PROTOBUF_PROTOC}
         ARGS --grpc_out "../protos/gen/cpp"
         --cpp_out "../protos/gen/cpp"
