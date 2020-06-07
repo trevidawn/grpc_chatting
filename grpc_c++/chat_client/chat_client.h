@@ -5,7 +5,7 @@
 #include <grpcpp/create_channel.h>
 #include <grpcpp/security/credentials.h>
 
-#include "../protos/gen/chat.grpc.pb.h"
+#include "../protos/gen/cpp/chat.grpc.pb.h"
 
 class ChatClient {
 public:

@@ -1,10 +1,13 @@
 #ifndef CHAT_CHAT_SERVER_H
 #define CHAT_CHAT_SERVER_H
 
-#include "../protos/gen/chat.grpc.pb.h"
+#include "../protos/gen/cpp/chat.grpc.pb.h"
+#include "chat_dbaccessor.h"
 
 class ChatServiceImpl final : public cpp_chat::chat::Service {
 public:
+    ChatServiceImpl() : dbAccessorClient(grpc::CreateChannel("localhost:50052", grpc::InsecureChannelCredentials())) {};
+
     grpc::Status
     login(grpc::ServerContext *context, const cpp_chat::User *user, cpp_chat::SimpleResponse *sr) override;
 
@@ -26,6 +29,8 @@ public:
 private:
     std::vector<cpp_chat::Message> v;
     std::set<std::string> userIdList;
+
+    DbAccessorClient dbAccessorClient;
 };
 
 #endif //CHAT_CHAT_SERVER_H

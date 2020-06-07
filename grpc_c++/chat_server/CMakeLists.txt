@@ -3,9 +3,7 @@ project(chat_server)
 
 set(CMAKE_CXX_STANDARD 14)
 
-# custom variable
-set(_binary chat_server)
-set(PROTO_NAME chat)
+#set(PROTO_NAME chat)
 
 find_package(Threads REQUIRED)
 
@@ -34,29 +32,48 @@ else()
 endif()
 
 # Proto file
-get_filename_component(proto "../protos/${PROTO_NAME}.proto" ABSOLUTE)
-get_filename_component(proto_path "${proto}" PATH)
+get_filename_component(chat_proto "../protos/chat.proto" ABSOLUTE)
+get_filename_component(chat_proto_path "${chat_proto}" PATH)
+
+get_filename_component(dbaccessor_proto "../protos/dbaccessor.proto" ABSOLUTE)
+get_filename_component(dbaccessor_proto_path "${dbaccessor_proto}" PATH)
 
 
 # # Generated sources
-set(proto_srcs "${proto_path}/gen/${PROTO_NAME}.pb.cc")
-set(proto_hdrs "${proto_path}/gen/${PROTO_NAME}.pb.h")
-set(grpc_srcs "${proto_path}/gen/${PROTO_NAME}.grpc.pb.cc")
-set(grpc_hdrs "${proto_path}/gen/${PROTO_NAME}.grpc.pb.h")
+set(chat_proto_srcs "${chat_proto_path}/gen/cpp/chat.pb.cc")
+set(chat_proto_hdrs "${chat_proto_path}/gen/cpp/chat.pb.h")
+set(chat_grpc_srcs "${chat_proto_path}/gen/cpp/chat.grpc.pb.cc")
+set(chat_grpc_hdrs "${chat_proto_path}/gen/cpp/chat.grpc.pb.h")
+
+set(dbaccessor_proto_srcs "${dbaccessor_proto_path}/gen/cpp/dbaccessor.pb.cc")
+set(dbaccessor_proto_hdrs "${dbaccessor_proto_path}/gen/cpp/dbaccessor.pb.h")
+set(dbaccessor_grpc_srcs "${dbaccessor_proto_path}/gen/cpp/dbaccessor.grpc.pb.cc")
+set(dbaccessor_grpc_hdrs "${dbaccessor_proto_path}/gen/cpp/dbaccessor.grpc.pb.h")
+
 add_custom_command(
-        OUTPUT "${proto_srcs}" "${proto_hdrs}" "${grpc_srcs}" "${grpc_hdrs}"
+        OUTPUT "${chat_proto_srcs}" "${chat_proto_hdrs}" "${chat_grpc_srcs}" "${chat_grpc_hdrs}"
         COMMAND ${_PROTOBUF_PROTOC}
-        ARGS --grpc_out "../protos/gen"
-        --cpp_out "../protos/gen"
-        -I "${proto_path}"
+        ARGS --grpc_out "../protos/gen/cpp"
+        --cpp_out "../protos/gen/cpp"
+        -I "${chat_proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
-        "${proto}"
-        DEPENDS "${proto}")
+        "${chat_proto}"
+        DEPENDS "${chat_proto}")
+
+add_custom_command(
+        OUTPUT "${dbaccessor_proto_path}" "${dbaccessor_proto_path}" "${dbaccessor_proto_path}" "${dbaccessor_proto_path}"
+        COMMAND ${_PROTOBUF_PROTOC}
+        ARGS --grpc_out "../protos/gen/cpp"
+        --cpp_out "../protos/gen/cpp"
+        -I "${dbaccessor_proto_path}"
+        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+        "${dbaccessor_proto}"
+        DEPENDS "${dbaccessor_proto}")
 
 # Include generated *.pb.h files
-include_directories("${CMAKE_CURRENT_BINARY_DIR}/protos/gen")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/protos/gen/cpp")
 
 
-add_executable(${_binary} main.cpp chat_server.cpp ${proto_srcs} ${grpc_srcs})
-target_link_libraries(${_binary} ${_REFLECTION} ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF})
+add_executable(chat_server main.cpp chat_server.cpp chat_dbaccessor.cpp ${chat_proto_srcs} ${chat_grpc_srcs} ${dbaccessor_proto_srcs} ${dbaccessor_grpc_srcs})
+target_link_libraries(chat_server ${_REFLECTION} ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF})
 

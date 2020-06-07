@@ -39,15 +39,15 @@ get_filename_component(proto_path "${proto}" PATH)
 
 
 # # Generated sources
-set(proto_srcs "${proto_path}/gen/${PROTO_NAME}.pb.cc")
-set(proto_hdrs "${proto_path}/gen/${PROTO_NAME}.pb.h")
-set(grpc_srcs "${proto_path}/gen/${PROTO_NAME}.grpc.pb.cc")
-set(grpc_hdrs "${proto_path}/gen/${PROTO_NAME}.grpc.pb.h")
+set(proto_srcs "${proto_path}/gen/cpp/${PROTO_NAME}.pb.cc")
+set(proto_hdrs "${proto_path}/gen/cpp/${PROTO_NAME}.pb.h")
+set(grpc_srcs "${proto_path}/gen/cpp/${PROTO_NAME}.grpc.pb.cc")
+set(grpc_hdrs "${proto_path}/gen/cpp/${PROTO_NAME}.grpc.pb.h")
 add_custom_command(
         OUTPUT "${proto_srcs}" "${proto_hdrs}" "${grpc_srcs}" "${grpc_hdrs}"
         COMMAND ${_PROTOBUF_PROTOC}
-        ARGS --grpc_out "../protos/gen"
-        --cpp_out "../protos/gen"
+        ARGS --grpc_out "../protos/gen/cpp"
+        --cpp_out "../protos/gen/cpp"
         -I "${proto_path}"
         --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
         "${proto}"

@@ -103,6 +103,9 @@ ChatServiceImpl::enterChatRoom(grpc::ServerContext *context,
 
             cout << message.user_id() << " : " << message.text() << endl;
 
+            // DB insert using gRPC
+            dbAccessorClient.insertMessage(message.user_id(), message.text());
+
             v.push_back(message);
             lk.unlock();
         }
